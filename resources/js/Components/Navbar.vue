@@ -1,5 +1,20 @@
 <template>
-<nav class="navbar navbar-expand-lg" style="background-color: #FFFACD">
+
+<div class="nav border-bottom sticky-top top-0 left-0 right-0" style="background-color: #FFFACD;">
+        <nav class="navbar navbar-stick gap-3 px-2 container border-bottom py-2" style="background-color: #FFFACD;">
+          <a href="/" class="navbar-brand primary-color">Accueil.</a>
+          <div class="d-lg-none">
+            <i @click="showNavBarLinks = !showNavBarLinks" class="fa-solid fa-bars icon"></i>
+          </div>
+          <div v-if="showNavBarLinks" class="d-flex gap-5 ">
+              <a :href="link.link" v-for="(link,index) in links" :key="index" class="nav-link" @click="clickedLink = index" :class="index == clickedLink ? 'primary-color' : 'unselected-color'">{{ link.nom }}</a>
+              
+          </div>
+          
+          
+        </nav>
+    </div>
+<!--<nav class="navbar navbar-expand-lg" style="background-color: #FFFACD">
   <a class="navbar-brand ml-4" href="/">Accueil</a>
 
   <div>
@@ -15,8 +30,35 @@
       </li>
     </ul>
   </div>
-</nav>
+</nav>-->
 </template>
+<script setup>
+import { ref } from 'vue';
+import axios from 'axios';
+
+const links = [{
+  nom: 'NOS PARCOURS ORGANISÉS',
+  link: '/list',
+}, {
+  nom: 'NOS PARCOURS SUR MESURE',
+  link: '#',
+}, {
+  nom: 'NOS OPTIONS',
+  link: '/options',
+}
+]
+const showNavBarLinks = ref(true)
+
+addEventListener("resize", (e) => {
+    if (window.innerWidth > 1020)
+        showNavBarLinks.value = true
+    else if(showNavBarLinks.value == true){
+        showNavBarLinks.value = false
+    }
+})
+
+</script>
+
 <!--<nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd;">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,4 +81,8 @@
                 </div>
             </div>
         </nav>-->
-        
+<style>
+.nav{
+  z-index: 100;
+}
+</style>

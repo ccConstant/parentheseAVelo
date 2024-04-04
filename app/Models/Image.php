@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Parcours;
 
 class Image extends Model
 {
@@ -11,4 +12,8 @@ class Image extends Model
         'path', 
         'parcours_id'
     ]; 
+
+    public function parcours(){
+        return $this->belongsTo(Parcours::class, 'parcours_id') ; 
+    }
 }

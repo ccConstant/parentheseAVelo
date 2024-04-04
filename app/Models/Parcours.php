@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Image;
 
 class Parcours extends Model
 {
@@ -16,6 +17,12 @@ class Parcours extends Model
         'deniveleCumul',
         'prix',
         'distance_moy',
-        'plan_parcours'
+        'plan_parcours',
+        'description_courte'
     ];
+
+
+    public function images(){
+        return $this->hasMany(Image::class) ;
+    }
 }
