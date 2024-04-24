@@ -20,11 +20,16 @@
             <i class="fas fa-bicycle me-3"></i>La parenthèse à vélo 
           </h6>
           <p>
-            Here you can use rows and columns to organize your footer content. Lorem ipsum
-            dolor sit amet, consectetur adipisicing elit.
+              Des moments simples, des souvenirs inoubliables
           </p>
           <br>
            <p>
+            <u><a href="/condGénéralesVente" class="text-reset">CONDITIONS GÉNÉRALES DE VENTE</a></u>
+          </p>
+          <p>
+            <u><a href="/mentionsLegales" class="text-reset">MENTIONS LÉGALES</a></u>
+          </p>
+          <p>
             <u><a href="/admin" class="text-reset">ACCÈS ADMINISTRATEUR</a></u>
           </p>
         </div>
@@ -43,7 +48,7 @@
             <i class="fas fa-envelope me-3"></i>
             info@example.com
           </p>
-          <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
+          <p><i class="fas fa-phone me-3"></i>  06 71 08 12 72</p>
         </div>
         <!-- Grid column -->
       </div>

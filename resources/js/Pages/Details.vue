@@ -16,23 +16,18 @@ import Footer from '@/Components/Footer.vue'
 
 export default {
     data() {
+        return {
+             id: window.location.pathname.split('/')[2]
+        }
     },
 
     created() {
         console.log('Details.vue created');
-
-
-        
-        /*axios.get('/parcours')
-            .then(response => {
-                console.log(response.data);
-            }).catch(() => {
-                console.log(Error.message)
-            });*/
-                
-            axios.get('/parcours').then((response) => {
-               console.log(response.data);
-            }).catch(e => console.log(e))
+        console.log(this.id);
+        const getParcoursUrl = (id) => `/parcours/get/${id}`;
+        axios.get(getParcoursUrl(this.id)).then((response) => {
+            console.log(response.data);
+        }).catch(e => console.log(e))
     }
 }
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Parcours;
 
 class Etape extends Model
 {
@@ -16,4 +17,8 @@ class Etape extends Model
         'NumeroEtape',
         'parcours_id'
     ];
+
+    public function parcours(){
+        return $this->belongsTo(Parcours::class, 'parcours_id') ; 
+    }
 }

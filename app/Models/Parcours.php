@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Image;
+use App\Models\Etape;
 
 class Parcours extends Model
 {
@@ -24,5 +25,9 @@ class Parcours extends Model
 
     public function images(){
         return $this->hasMany(Image::class) ;
+    }
+
+    public function etapes(){
+        return $this->hasMany(Etape::class) ;
     }
 }
