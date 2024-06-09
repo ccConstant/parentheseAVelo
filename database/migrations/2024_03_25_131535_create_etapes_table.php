@@ -17,7 +17,7 @@ return new class extends Migration
             $table->String('Ville_arrivee') ; 
             $table->float('Distance') ;
             $table->float('Denivele');
-            $table->String('Description') ;
+            $table->text('Description') ;
             $table->integer('NumeroEtape');
             $table->unsignedBigInteger('parcours_id');
             $table->foreign('parcours_id')->references('id')->on('parcours')->onDelete('cascade');

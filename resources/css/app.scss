@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "/node_modules/bootstrap/scss/bootstrap.scss";
+
+.link{
+    color: black;
+    cursor: pointer;
+}
+
+.primary-color{
+    color: black;
+}
+.unselected-color{
+    color: #869CB8;
+}
+a.unselected-color:hover{
+    color: black;
+}

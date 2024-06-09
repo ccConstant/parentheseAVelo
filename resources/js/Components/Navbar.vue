@@ -1,13 +1,13 @@
 <template>
 
-<div class="nav border-bottom sticky-top top-0 left-0 right-0" style="background-color: #FFFACD;">
-        <nav class="navbar navbar-stick gap-3 px-2 container border-bottom py-2" style="background-color: #FFFACD;">
-          <a href="/" class="navbar-brand primary-color">Accueil.</a>
+<div class="nav sticky-top top-0 left-0 right-0" style="background-color: #000000;">
+        <nav class="navbar navbar-stick gap-3 px-2 container" style="background-color: #000000;">
+          <a href="/" class="navbar-brand primary-color" style="color:white;">Accueil.</a>
           <div class="d-lg-none">
             <i @click="showNavBarLinks = !showNavBarLinks" class="fa-solid fa-bars icon"></i>
           </div>
           <div v-if="showNavBarLinks" class="d-flex gap-5 ">
-              <a :href="link.link" v-for="(link,index) in links" :key="index" class="nav-link" @click="clickedLink = index" :class="index == clickedLink ? 'primary-color' : 'unselected-color'">{{ link.nom }}</a>
+              <a :href="link.link" v-for="(link,index) in links" :key="index" class="nav-link" @click="clickedLink = index" :style="index == clickedLink ? 'color:deepskyblue;' : 'color:white;'">{{ link.nom }}</a>
               
           </div>
           
@@ -41,7 +41,7 @@ const links = [{
   link: '/list',
 }, {
   nom: 'NOS PARCOURS SUR MESURE',
-  link: '#',
+  link: '/parcoursSurMesure',
 }, {
   nom: 'NOS OPTIONS',
   link: '/options',
@@ -84,5 +84,9 @@ addEventListener("resize", (e) => {
 <style>
 .nav{
   z-index: 100;
+}
+a{
+  font-family:bebas neue;
+  font-size: 15px;
 }
 </style>

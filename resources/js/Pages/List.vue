@@ -1,17 +1,20 @@
 <template>
 <Navbar></Navbar>
 
+
+
 <div class="background">                            
     <h2> Nos parcours organisés </h2>
     <div class="alignBlock">
         <div class="alignBlockInline" v-for="(component) in this.parcours" :key="component.key">
-            <Parcours :id=component.id
-                        :titre=component.titre
-                        :dureeJours=component.dureeJours
-                        :prix=component.prix
-                        :difficulte=component.difficulte
-                        :description_courte=component.description_courte
-                        :image=component.image
+            <Parcours :Id=component.id
+                        :Titre=component.titre
+                        :DureeJours=component.dureeJours
+                        :Prix=component.prix
+                        :Difficulte=component.difficulte
+                        :Description_courte=component.description_courte
+                        :Image=component.image
+                        :Ville_depart=component.ville_depart
             ></Parcours>
         </div>
     </div>
@@ -34,9 +37,8 @@ export default {
             parcours:[],
         }
     },
-
     created() {
-        console.log('Details.vue created');
+        console.log('List.vue created');
 
 
         
@@ -50,7 +52,7 @@ export default {
             axios.get('/parcours').then((response) => {
                this.parcours=response.data;
             }).catch(e => console.log(e))
-    }
+    },
 }
 
 
@@ -58,12 +60,16 @@ export default {
 <style>
 
 h2{
-    font-size: 40px;
+    font-size: 50px;
     text-align:center;
+    font-family: bebas neue;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding-top: 20px;
 }
 
 .card{
-    background-color:navajowhite;
+    background-color:white;
     margin-left: 40px;
 }
 
@@ -81,11 +87,11 @@ h2{
 }
 
 .alignBlock{
-    margin-left: 320px;
+    margin-left: 150px;
     margin-right: auto;
 }
 .background{
-    background-color:blanchedalmond;
+    background-color:white;
     padding-top:40px;
     padding-bottom:100px;
 }
@@ -95,7 +101,7 @@ h5{
 }
 p{
     text-align: justify;
-    padding-bottom:10px;
+    padding-bottom:0px;
 }
     
 </style>

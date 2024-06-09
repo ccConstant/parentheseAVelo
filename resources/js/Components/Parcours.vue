@@ -1,7 +1,7 @@
 
 <template>
-    <div class="card" style="width: 21rem; ">
-        <img class="card-img-top" alt="Card image cap" v-bind:src="image">
+    <div class="card h-100" style="width: 21rem; background-color:#4CAF50;">
+        <img id="imgParcours" class="card-img-top" alt="Card image cap" v-bind:src="image">
         <div class="card-body">
             <h5 class="card-title">{{titre}}</h5>
             <div class="Inline">
@@ -108,6 +108,7 @@ export default {
             difficulte: this.Difficulte,
             description_courte: this.Description_courte,
             ville_depart: this.Ville_depart
+            
         }
     },
     methods: {
@@ -132,6 +133,23 @@ export default {
 
 .Inline{
     display: flex;
+}
+#imgParcours{
+    height: 230px;
+    width: 100%;
+    object-fit: cover;
+}
+p{
+    font-family: Montserrat Medium;
+    font-size: 15px;
+    padding-bottom: 0px;
+    text-align: justify;
+}
+h5{
+    font-size:20px;
+    font-weight:bold;
+    font-family:bebas neue;
+    padding-bottom:10px;
 }
 
 </style>

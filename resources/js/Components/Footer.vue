@@ -1,9 +1,9 @@
 <template>
   
   <!-- Footer -->
-<footer class=" text-center " style="background-color:#fde0a0;">
+<footer class=" text-center " style="background-color:#000000;">
   <!-- Section: Social media -->
-  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+  <section class="justify-content-center justify-content-lg-between p-2 border-bottom">
     <!-- Left -->
   </section>
   <!-- Section: Social media -->
@@ -43,10 +43,9 @@
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-          <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
           <p>
             <i class="fas fa-envelope me-3"></i>
-            info@example.com
+            contact@la-parenthese-a-velo.fr
           </p>
           <p><i class="fas fa-phone me-3"></i>  06 71 08 12 72</p>
         </div>
@@ -58,7 +57,7 @@
   <!-- Section: Links  -->
 
   <!-- Copyright -->
-  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+  <div class="text-center" style="background-color: rgba(0, 0, 0, 0.05);">
     © 2021 Copyright:
     <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
   </div>
@@ -72,5 +71,15 @@
 </script>
 
 <style>
+footer h6{
+  color: white;
+  font-family:bebas neue;
+  font-size: 18px;
+}
+footer p{
+  color: white;
+  font-family: Montserrat Medium;
+
+}
 
 </style>

@@ -6,7 +6,7 @@
     </div>
 </div>
 <div class="background">  
-    <p> Vous êtes persuadé qu’il est inutile d’aller loin pour aller bien.
+    <p class="home"> Vous êtes persuadé qu’il est inutile d’aller loin pour aller bien.
 Vous êtes plus adepte de l’authentique que de l’exotique.
 Vous préférez partager des bons moments avec vos amis plutôt que de leur présenter vos plus belles photos.
 Vous nourrissez depuis longtemps l’idée de découvrir les magnifiques paysages de la France à vélo.
@@ -63,7 +63,7 @@ import Parcours from '@/Components/Parcours.vue'
 </script>
 <style>
 .WelcomePage{
-    background-color: #e3f2fd;
+    background-color: black;
     padding: 20px;
     margin: 20px;
     border-radius: 10px;
@@ -71,12 +71,15 @@ import Parcours from '@/Components/Parcours.vue'
 
 }
 h2{
-    font-size: 40px;
+    font-size: 35px;
     text-align:center;
+    font-family: bebas neue;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .card{
-    background-color:navajowhite;
+    background-color:black;
     margin-left: 40px;
 }
 
@@ -94,21 +97,32 @@ h2{
 }
 
 .alignBlock{
-    margin-left: 320px;
+    margin-left: 150px;
     margin-right: auto;
 }
 .background{
-    background-color:blanchedalmond;
+    background-color:white;
     padding-top:40px;
     padding-bottom: 100px;
 }
+
 h5{
-    font-size:25px;
+    font-size:20px;
     font-weight:bold;
+    font-family:bebas neue;
+    padding-bottom:10px;
+}
+.home{
+    text-align: justify;
+    padding-bottom:40px;
+    padding-left : 20px;
+    padding-right: 20px;
+    font-size: 18px;
+    font-family: Montserrat Medium;
 }
 p{
-    text-align: justify;
-    padding-bottom:10px;
+    font-family: Montserrat Medium;
+    font-size: 15px;
 }
     
 </style>

@@ -30,6 +30,10 @@ Route::get('/parcours/{id}/', function() {
     return Inertia::render('Details');
 });
 
+Route::get('/parcoursSurMesure', function() {
+    return Inertia::render('ParcoursSurMesure');
+});
+
 Route::get('/options', function() {
     return Inertia::render('Options');
 });
