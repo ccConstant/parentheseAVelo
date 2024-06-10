@@ -2,7 +2,7 @@
 
 <div class="nav sticky-top top-0 left-0 right-0" style="background-color: #000000;">
         <nav class="navbar navbar-stick gap-3 px-2 container" style="background-color: #000000;">
-          <a href="/" class="navbar-brand primary-color" style="color:white;">Accueil.</a>
+          <a href="/" class="navbar-brand primary-color" style="color:white;">Accueil</a>
           <div class="d-lg-none">
             <i @click="showNavBarLinks = !showNavBarLinks" class="fa-solid fa-bars icon"></i>
           </div>

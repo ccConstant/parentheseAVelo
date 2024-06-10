@@ -42,12 +42,12 @@ Route::get('/admin', function() {
     return Inertia::render('Welcome');
 });
 
-Route::get('/condGénéralesVente', function() {
-    return Inertia::render('Welcome');
+Route::get('/condGeneralesVente', function() {
+    return Inertia::render('CondGeneraleVente');
 });
 
-Route::get('/mentionsLegales', function() {
-    return Inertia::render('Welcome');
+Route::get('/condUtilisation', function() {
+    return Inertia::render('CondUtilisation');
 });
 
 

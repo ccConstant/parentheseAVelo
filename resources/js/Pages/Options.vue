@@ -5,9 +5,8 @@
 
   <div class="background">
     <div class="backgroundTitle"> 
-    <h3>Location de vélo</h3>
+      <h3>Location de vélo</h3>
     </div>
-
     <div class="content">
       <img class="image" src="/images/options/VeloLocation.jpeg" alt="Vélo en location">
       <p class="text">
@@ -20,11 +19,10 @@
 
   <div class="background">
     <div class="backgroundTitle"> 
-    <h3>Accompagnateur </h3>
+      <h3>Accompagnateur </h3>
     </div>
-
     <div class="content">
-      <p class="text" style="margin-left:5%;">
+      <p class="text">
         Accompagnement tout le temps du parcours <br>
         Assistance au guidage et prise en charge de la logistique <br>
         Prix à la journée pour le groupe : <b>250€</b>
@@ -34,11 +32,10 @@
 
   <div class="background">
     <div class="backgroundTitle"> 
-    <h3>Drone </h3>
+      <h3>Drone</h3>
     </div>
-
     <div class="content">
-        <img class="image" src="/images/options/Drone.jpg" alt="Aperçu du drône">
+      <img class="image" src="/images/options/Drone.jpg" alt="Aperçu du drône">
       <p class="text">
         Prises de vues aériennes tout au long du parcours <br>
         Possible uniquement avec l’option « accompagnateur » <br>
@@ -50,14 +47,40 @@
 
   <div class="background">
     <div class="backgroundTitle"> 
-    <h3>Organisation de visite </h3>
+      <h3>Organisation de visite</h3>
     </div>
-
     <div class="content">
-        <img class="image" style="height: 230px;" src="/images/options/Visite.jpg" alt="Image de visite">
+      <img class="image" style="height: 230px;" src="/images/options/Visite.jpg" alt="Image de visite">
       <p class="text">
         Organisation de visites pour découvrir des lieux remarquables sur vos parcours <br>
         Prix par personne : <b> prix du billet + 5€ </b>
+      </p>
+    </div>
+  </div>
+
+  <div class="background">
+    <div class="backgroundTitle"> 
+      <h3>Repas du midi</h3>
+    </div>
+    <div class="content">
+      <img class="image" style="height: 230px;" src="/images/options/RepasMidi.jpg" alt="Image d'exemple de repas">
+      <p class="text">
+        Réservation du repas du midi proche du lieu où vous souhaitez faire étape <br>
+        Menu sans les boissons <br>
+        Prix par personne : <b>25€</b>
+      </p>
+    </div>
+  </div>
+
+  <div class="background">
+    <div class="backgroundTitle"> 
+      <h3>Chambre particulière</h3>
+    </div>
+    <div class="content">
+      <img class="image" style="height: 230px;" src="/images/options/ChambreParticuliere.jpg" alt="Image d'exemple de chambre">
+      <p class="text">
+        Possibilité de demander une chambre individuelle alors que le tarif des séjours organisés prévoit une chambre pour 2 personnes <br>
+        Coût supplémentaire : <b>50€</b>
       </p>
     </div>
   </div>
@@ -87,9 +110,9 @@ h2 {
   border-radius: 10px;
 }
 
-.backgroundTitle{
-    background-color: white;
-    border-radius: 8px;
+.backgroundTitle {
+  background-color: white;
+  border-radius: 8px;
 }
 
 h3 {
@@ -110,12 +133,41 @@ h3 {
   height: auto;
   max-width: 300px;
   object-fit: cover;
-  margin-left:5%;
+  margin-left: 5%;
 }
 
 .text {
   flex: 2;
-  font-family:Montserrat Medium;
+  font-family: 'Montserrat Medium';
   font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .image {
+    margin: 0 auto 20px auto;
+    width: 100%;
+    max-width: none;
+  }
+  .text {
+    text-align: center;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 30px;
+  }
+  .background {
+    margin: 20px;
+    padding: 10px;
+  }
+  .text {
+    font-size: 16px;
+  }
 }
 </style>
