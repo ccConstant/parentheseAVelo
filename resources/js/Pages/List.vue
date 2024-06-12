@@ -57,51 +57,47 @@ export default {
 
 
 </script>
-<style>
-
-h2{
-    font-size: 50px;
-    text-align:center;
-    font-family: bebas neue;
-    text-transform: uppercase;
-    font-weight: bold;
-    padding-top: 20px;
+<style scoped>
+h2 {
+  font-size: 2.5rem; /* Utilisation d'unités relatives */
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-top: 20px;
+  margin: 0 20px; /* Ajout de marges latérales pour les petits écrans */
 }
 
-.card{
-    background-color:white;
-    margin-left: 40px;
+.alignBlockInline {
+  margin: 20px; /* Ajout de marge pour espacer les éléments */
+  display: flex;
+  justify-content: center;
+  width: 100%; /* Prendre toute la largeur disponible */
+  box-sizing: border-box; /* Inclure les marges et les bordures dans la largeur totale */
 }
 
-.Littlepadding{
-    padding-left: 5px;
+.alignBlock {
+  display: flex;
+  flex-wrap: wrap; /* Permettre aux éléments de se répartir sur plusieurs lignes */
+  justify-content: center; /* Centrer les éléments horizontalement */
+  padding: 0 20px; /* Ajout de padding pour les petits écrans */
 }
 
-/*.Bigpadding{
-    padding-left: 50px;
-}*/
-
-.alignBlockInline{
-    margin-top:70px;
-    display: inline-block;
+.background {
+  background-color: white;
+  padding-top: 40px;
+  padding-bottom: 100px;
 }
 
-.alignBlock{
-    margin-left: 150px;
-    margin-right: auto;
+@media (min-width: 768px) {
+  .alignBlockInline {
+    width: calc(50% - 40px); /* Deux éléments par ligne avec une marge */
+  }
 }
-.background{
-    background-color:white;
-    padding-top:40px;
-    padding-bottom:100px;
+
+@media (min-width: 1024px) {
+  .alignBlockInline {
+    width: calc(33.33% - 40px); /* Trois éléments par ligne avec une marge */
+  }
 }
-h5{
-    font-size:25px;
-    font-weight:bold;
-}
-p{
-    text-align: justify;
-    padding-bottom:0px;
-}
-    
 </style>

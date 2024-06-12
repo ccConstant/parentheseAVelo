@@ -193,7 +193,7 @@ export default {
         position: relative;
         width: 100%;
         overflow: hidden;
-        height: 800px;
+        height: 70vh; 
     }
 
     .carousel-slide {

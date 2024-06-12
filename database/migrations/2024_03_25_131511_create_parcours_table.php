@@ -22,7 +22,7 @@ return new class extends Migration
             $table->float("prix");
             $table->float("distance_moy");
             $table->string('plan_parcours');
-            $table->string('description_courte');
+            $table->text('description_courte');
             $table->timestamps();
         });
     }
