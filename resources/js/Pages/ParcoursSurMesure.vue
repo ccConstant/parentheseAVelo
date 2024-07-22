@@ -7,7 +7,7 @@
         id="Questionnaire de parcours sur mesure"
         title="Questionnaire de parcours sur mesure"
         width="100%"
-        height="2000"
+        height="4000"
         src="https://docs.google.com/forms/d/e/1FAIpQLSdGyKrQO2D3YyXcC00pJgeuw0Lj9p31cCBIq3GPqzS8Gayt7g/viewform?usp=sf_link">
         </iframe>
     </div>
@@ -30,7 +30,7 @@ import Footer from '@/Components/Footer.vue'
     display: block;
     margin: 0 auto;
     max-width: 100%;
-    height: auto;
+    height: 1000px;
 }
 
 h2 {

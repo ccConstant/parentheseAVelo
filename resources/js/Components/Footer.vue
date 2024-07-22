@@ -67,6 +67,14 @@
   // No additional JavaScript needed for this example
 </script>
 
+<script>
+export default {
+  created(){
+      console.log('Footer.vue created');
+  }
+}
+</script>
+
 <style>
 footer h6 {
   color: white;

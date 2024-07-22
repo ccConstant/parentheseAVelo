@@ -12,12 +12,13 @@
       Vous préférez partager des bons moments avec vos amis plutôt que de leur présenter vos plus belles photos.
       Vous nourrissez depuis longtemps l’idée de découvrir les magnifiques paysages de la France à vélo.
       Pourtant, vous n’avez jamais réalisé ce projet car c’est compliqué et vous ne savez pas vraiment comment vous y prendre.
-      Nous sommes là pour vous aider à réaliser ce rêve : <b>appelez nous, on s’occupe de tout !</b></p>
+      Nous sommes là pour vous aider à réaliser ce rêve : <b>appelez nous, on s’occupe de tout !</b>
+    </p>
     <h2>Nos parcours à la une</h2>
     <div class="alignBlock">
-      <div v-if="this.parcours.length != 0">
+      <div v-if="parcours.length != 0">
         <div class="parcours-container">
-          <div class="alignBlockInline" v-for="(component) in this.parcours" :key="component.key">
+          <div class="alignBlockInline" v-for="component in parcours" :key="component.id">
             <Parcours :Id="component.id"
                       :Titre="component.titre"
                       :DureeJours="component.dureeJours"
@@ -35,6 +36,13 @@
   <Footer></Footer>
 </template>
 
+<script setup>
+import axios from 'axios';
+import Navbar from '@/Components/Navbar.vue';
+import Footer from '@/Components/Footer.vue';
+import Parcours from '@/Components/Parcours.vue';
+</script>
+
 <script>
 export default {
   data() {
@@ -51,12 +59,6 @@ export default {
     }).catch(e => console.log(e));
   }
 }
-</script>
-
-<script setup>
-import Navbar from '@/Components/Navbar.vue';
-import Footer from '@/Components/Footer.vue';
-import Parcours from '@/Components/Parcours.vue';
 </script>
 
 <style>

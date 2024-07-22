@@ -32,6 +32,14 @@ addEventListener("resize", (e) => {
 });
 </script>
 
+<script>
+export default {
+  created(){
+      console.log('Navbar.vue created');
+  }
+}
+</script>
+
 <style scoped>
 .nav {
   z-index: 100;

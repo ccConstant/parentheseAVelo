@@ -111,14 +111,14 @@ export default {
             
         }
     },
+    created() {
+        console.log('Parcours.vue created');
+    },
     methods: {
        redirect(){
         window.location.href = "/parcours/"+this.id;
-        },
-        created() {
-            console.log('Parcours.vue created');
         }
-    }
+    },
 }
 </script>
 <style>
@@ -145,11 +145,11 @@ p{
     padding-bottom: 0px;
     text-align: justify;
 }
-h5{
-    font-size:20px;
-    font-weight:bold;
-    font-family:bebas neue;
-    padding-bottom:10px;
+h5 {
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'Bebas Neue', sans-serif;
+  padding-bottom: 10px;
 }
 
 </style>

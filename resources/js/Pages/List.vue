@@ -4,9 +4,9 @@
 
 
 <div class="background">                            
-    <h2> Nos parcours organisés </h2>
+    <h2 style="margin-bottom:50px;"> Nos parcours organisés </h2>
     <div class="alignBlock">
-        <div class="alignBlockInline" v-for="(component) in this.parcours" :key="component.key">
+        <div class="alignBlockInline" v-for="(component) in parcours" :key="component.key">
             <Parcours :Id=component.id
                         :Titre=component.titre
                         :DureeJours=component.dureeJours
@@ -87,6 +87,13 @@ h2 {
   background-color: white;
   padding-top: 40px;
   padding-bottom: 100px;
+}
+
+h5 {
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'Bebas Neue', sans-serif;
+  padding-bottom: 10px;
 }
 
 @media (min-width: 768px) {
