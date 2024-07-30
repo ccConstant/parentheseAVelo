@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\ParcoursController;
 use App\Http\Controllers\EtapeController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,16 @@ use App\Http\Controllers\ImageController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+/*Route::get('/', function () {
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});*/
 
 Route::get('/', function() {
     return Inertia::render('Welcome');
@@ -38,10 +49,6 @@ Route::get('/options', function() {
     return Inertia::render('Options');
 });
 
-Route::get('/admin', function() {
-    return Inertia::render('Welcome');
-});
-
 Route::get('/condGeneralesVente', function() {
     return Inertia::render('CondGeneraleVente');
 });
@@ -49,8 +56,6 @@ Route::get('/condGeneralesVente', function() {
 Route::get('/condUtilisation', function() {
     return Inertia::render('CondUtilisation');
 });
-
-
 
 Route::get('/parcours', [ParcoursController::class, 'get_parcours']);
 Route::get('/lastparcours', [ParcoursController::class, 'get_last_parcours']);
@@ -61,6 +66,22 @@ Route::get('/image/{id}', [ImageController::class, 'get_image']);
 Route::get('/etape/{id}', [EtapeController::class, 'get_etape']);
 
 
-Route::fallback(function() {
-    return Inertia::render('Welcome');
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', function() {
+        return Inertia::render('Welcome');
+    });
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+require __DIR__.'/auth.php';
+
+
+/*Route::fallback(function() {
+    return Inertia::render('Welcome');
+});*/

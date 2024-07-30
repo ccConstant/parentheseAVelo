@@ -29,7 +29,7 @@
                 <u><a href="/condUtilisation" class="text-reset">CONDITIONS D'UTILISATIONS</a></u>
               </p>
               <p>
-                <u><a href="/admin" class="text-reset">ACCÈS ADMINISTRATEUR</a></u>
+                <u><a href="/dashboard" class="text-reset">ACCÈS ADMINISTRATEUR</a></u>
               </p>
             </div>
           </div>
@@ -52,13 +52,6 @@
       </div>
     </section>
     <!-- Section: Links  -->
-
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2021 Copyright:
-      <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-    </div>
-    <!-- Copyright -->
   </footer>
   <!-- Footer -->
 </template>
