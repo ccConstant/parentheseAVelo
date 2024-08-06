@@ -7,6 +7,7 @@ use App\Http\Controllers\ParcoursController;
 use App\Http\Controllers\EtapeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ImageUploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,13 +58,24 @@ Route::get('/condUtilisation', function() {
     return Inertia::render('CondUtilisation');
 });
 
+Route::get('/manageParcours', function() {
+    return Inertia::render('ManageParcours');
+})->name('manageParcours');
+
+Route::get('/addParcoursForm', function() {
+    return Inertia::render('AddParcoursForm');
+})->name('addParcoursForm');
+
 Route::get('/parcours', [ParcoursController::class, 'get_parcours']);
 Route::get('/lastparcours', [ParcoursController::class, 'get_last_parcours']);
 Route::get('/parcours/get/{id}', [ParcoursController::class, 'get_parcour']);
-Route::get('/parcours/{id}/etapes', [EtapeController::class, 'get_etapes']);
-Route::get('/parcours/{id}/images', [ImageController::class, 'get_images']);
-Route::get('/image/{id}', [ImageController::class, 'get_image']);
-Route::get('/etape/{id}', [EtapeController::class, 'get_etape']);
+Route::post('/parcours/maj', [ParcoursController::class, 'maj_parcours']);
+Route::post('/parcours/verif', [ParcoursController::class, 'verif_parcours']);
+Route::post('/parcours/add', [ParcoursController::class, 'add_parcours']);
+Route::post('/etape/add', [EtapeController::class, 'add_etape']);
+Route::post('/etape/verif', [EtapeController::class, 'verif_etape']);
+
+Route::post('/upload-image', [ImageUploadController::class, 'upload']);
 
 
 Route::get('/dashboard', function () {

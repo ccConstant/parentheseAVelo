@@ -1,4 +1,7 @@
 <template>
+<Head>
+  <title>{{ parcours.titre }}</title>
+</Head>
   <Navbar></Navbar>
   <div style="margin-bottom:50px">
     <h1>{{parcours.titre}}</h1>
@@ -140,6 +143,7 @@
 import Navbar from '@/Components/Navbar.vue';
 import Footer from '@/Components/Footer.vue';
 import Difficulte from '@/Components/Difficulte.vue';
+import { Head } from '@inertiajs/vue3';
 
 import { ref, onMounted } from 'vue';
 import axios from 'axios';

@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('etapes', function (Blueprint $table) {
             $table->id();
-            $table->String('Ville_depart') ; 
-            $table->String('Ville_arrivee') ; 
-            $table->float('Distance') ;
-            $table->float('Denivele');
-            $table->text('Description') ;
-            $table->integer('NumeroEtape');
+            $table->String('ville_depart') ; 
+            $table->String('ville_arrivee') ; 
+            $table->float('distance') ;
+            $table->float('denivele');
+            $table->text('description') ;
+            $table->integer('numero_etape');
             $table->unsignedBigInteger('parcours_id');
             $table->foreign('parcours_id')->references('id')->on('parcours')->onDelete('cascade');
             $table->timestamps();

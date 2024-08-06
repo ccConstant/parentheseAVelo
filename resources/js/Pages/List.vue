@@ -1,4 +1,5 @@
 <template>
+<Head title="Liste des parcours" /> 
 <Navbar></Navbar>
 
 
@@ -26,6 +27,7 @@
 import Navbar from '@/Components/Navbar.vue'
 import Footer from '@/Components/Footer.vue'
 import Parcours from '@/Components/Parcours.vue'
+import { Head } from '@inertiajs/vue3'
 </script>
 <script>
 

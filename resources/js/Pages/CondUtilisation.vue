@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <title>Conditions d'utilisation</title>
+    </Head>
   <Navbar></Navbar>
     <h2> Conditions générales d’utilisation du site internet (CGU) </h2>
     <h2>La parenthèse à vélo (L[P]AV) </h2>
@@ -81,6 +84,7 @@ La parenthèse à vélo – 6 Allée Pitton – 74940 Annecy. </b>
 import Navbar from '@/Components/Navbar.vue';
 import Footer from '@/Components/Footer.vue';
 import Parcours from '@/Components/Parcours.vue';
+import { Head } from '@inertiajs/vue3';
 </script>
 
 <style>

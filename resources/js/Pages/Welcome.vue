@@ -1,4 +1,5 @@
 <template>
+  <Head title="Accueil" />
   <Navbar></Navbar>
   <div class="welcomePage">
     <div>
@@ -41,6 +42,8 @@ import axios from 'axios';
 import Navbar from '@/Components/Navbar.vue';
 import Footer from '@/Components/Footer.vue';
 import Parcours from '@/Components/Parcours.vue';
+import { Head } from '@inertiajs/vue3';
+
 </script>
 
 <script>

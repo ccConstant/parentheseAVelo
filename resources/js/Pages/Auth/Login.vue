@@ -33,7 +33,7 @@ const submit = () => {
 <template>
     <Navbar></Navbar>
     <GuestLayout>
-        <Head title="Log in" />
+        <Head title="Connexion" />
         <h2> Connexion </h2>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">

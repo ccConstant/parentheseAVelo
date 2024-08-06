@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('titre');
             $table->text('description');
-            $table->integer('dureeJours');
-            $table->integer('dureeNuits');
+            $table->integer('dureeJours')->nullable();
+            $table->integer('dureeNuits')->nullable();
             $table->enum('difficulte', ['facile', 'moyen', 'difficile']);
-            $table->float('deniveleCumul');
+            $table->float('deniveleCumul')->nullable();
             $table->float("prix");
-            $table->float("distance_moy");
-            $table->string('plan_parcours');
+            $table->float("distance_moy")->nullable();
+            $table->string('plan_parcours')->nullable();
             $table->text('description_courte');
             $table->timestamps();
         });

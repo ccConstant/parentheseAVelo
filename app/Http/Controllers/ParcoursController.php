@@ -9,6 +9,35 @@ use App\Models\Image;
 
 class ParcoursController extends Controller
 {
+
+    public function verif_parcours(Request $request){
+        $this->validate(
+            $request,
+            [
+                'titre' => 'required|min:3|max:255',
+                'description' => 'required|min:3|max:800',
+                'description_courte' => 'required|min:3|max:255',
+                'difficulte' => 'required|in:facile,moyen,difficile',
+                'prix' => 'required|numeric'
+
+            ],
+            [
+                'titre.required' => 'Vous devez entrer un titre pour le parcours',
+                'titre.min' => 'Vous devez entrer au moins trois caractères',
+                'titre.max' => 'Vous devez entrer au maximum 255 caractères',
+                'description.required' => 'Vous devez entrer une description pour le parcours',
+                'description.min' => 'Vous devez entrer au moins trois caractères',
+                'description.max' => 'Vous devez entrer au maximum 800 caractères',
+                'description_courte.required' => 'Vous devez entrer une description courte pour le parcours',
+                'description_courte.min' => 'Vous devez entrer au moins trois caractères',
+                'description_courte.max' => 'Vous devez entrer au maximum 255 caractères',
+                'difficulte.required' => 'Vous devez entrer une difficulté pour le parcours',
+                'difficulte.in' => 'Vous devez entrer une difficulté valide pour le parcours',
+                'prix.required' => 'Vous devez entrer un prix pour le parcours',
+                'prix.numeric' => 'Vous devez entrer un prix valide pour le parcours'
+            ]
+        );
+    }
     public function get_parcours(){
         $parcours = Parcours::all();
         $container=array() ;
@@ -91,5 +120,42 @@ class ParcoursController extends Controller
 
         ]);
         return response()->json($container);
+    }
+
+    public function add_parcours(Request $request){
+        $parcour=Parcours::create([
+            'titre' => $request->titre,
+            'description' => $request->description,
+            'description_courte' => $request->description_courte,
+            'difficulte' => $request->difficulte,
+            'prix' => $request->prix
+        ]) ;
+        return response()->json($parcour->id);
+    }
+
+    public function maj_parcours(Request $request){
+        $parcour=Parcours::find($request->id);
+        $etapes=$parcour->etapes;
+        $dureeJours=0;
+        $dureeNuits=0;
+        $deniveleCumul=0;
+        $distance_moy=0;
+        foreach($etapes as $etape){
+            $deniveleCumul+=$etape->denivele;
+            if ($etape->numero_etape!=1){
+                $distance_moy+=$etape->distance;
+            }
+        }
+        if ($etapes->count()!=1){
+            $distance_moy=$distance_moy/($etapes->count()-1);
+        }
+        $dureeJours=$etapes->count();
+        $dureeNuits=$etapes->count()-1 ; 
+        $parcour->update([
+            'dureeJours' => $dureeJours,
+            'dureeNuits' => $dureeNuits,
+            'deniveleCumul' => $deniveleCumul,
+            'distance_moy' => $distance_moy
+        ]); 
     }
 }

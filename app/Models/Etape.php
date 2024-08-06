@@ -9,12 +9,12 @@ use App\Models\Parcours;
 class Etape extends Model
 {
     protected $fillable = [
-        'Ville_depart', 
-        'Ville_arrivee',
-        'Distance',
-        'Denivele',
-        'Description',
-        'NumeroEtape',
+        'ville_depart', 
+        'ville_arrivee',
+        'distance',
+        'denivele',
+        'description',
+        'numero_etape',
         'parcours_id'
     ];
 

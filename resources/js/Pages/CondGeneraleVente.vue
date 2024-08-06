@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <title>Conditions de ventes</title>
+    </Head>
   <Navbar></Navbar>
     <h2> Conditions de ventes (CDV) </h2>
     <h2>La parenthèse à vélo (L[P]AV) </h2>
@@ -156,6 +159,7 @@ RCS Annecy 983 838 913<br>
 import Navbar from '@/Components/Navbar.vue';
 import Footer from '@/Components/Footer.vue';
 import Parcours from '@/Components/Parcours.vue';
+import { Head } from '@inertiajs/vue3';
 </script>
 
 <style>

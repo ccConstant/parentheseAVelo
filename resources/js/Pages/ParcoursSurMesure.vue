@@ -1,4 +1,5 @@
 <template>
+    <Head title="Parcours sur mesure" />
     <Navbar></Navbar>
     
     <h2>Un parcours sur mesure ? Remplissez le questionnaire !</h2>
@@ -17,6 +18,7 @@
 <script setup>
 import Navbar from '@/Components/Navbar.vue'
 import Footer from '@/Components/Footer.vue'
+import { Head } from '@inertiajs/vue3'
 </script>
 
 <style scoped>

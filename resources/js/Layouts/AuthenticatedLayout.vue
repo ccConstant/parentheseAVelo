@@ -27,7 +27,14 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Tableau de bord
                                 </NavLink>
+                                <NavLink :href="route('manageParcours')" :active="route().current('manageParcours')">
+                                    Gérer les parcours
+                                </NavLink>
+                                <NavLink :href="route('addParcoursForm')" :active="route().current('addParcoursForm')">
+                                    Ajouter un nouveau parcours
+                                </NavLink>
                             </div>
+
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -109,6 +116,12 @@ const showingNavigationDropdown = ref(false);
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('manageParcours')" :active="route().current('manageParcours')">
+                             Gérer les parcours
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('addParcoursForm')" :active="route().current('addParcoursForm')">
+                            Ajouter un nouveau parcours
                         </ResponsiveNavLink>
                     </div>
 

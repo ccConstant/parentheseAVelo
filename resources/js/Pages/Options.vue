@@ -1,5 +1,6 @@
 <template>
   <Navbar></Navbar>
+  <Head title="Options" />
 
   <h2>Nos Options</h2>
 
@@ -91,6 +92,7 @@
 <script setup>
 import Navbar from '@/Components/Navbar.vue'
 import Footer from '@/Components/Footer.vue'
+import { Head } from '@inertiajs/vue3'
 </script>
 
 <style>
