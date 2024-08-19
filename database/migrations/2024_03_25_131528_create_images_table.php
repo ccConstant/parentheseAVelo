@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('parcours_id');
             $table->foreign('parcours_id')->references('id')->on('parcours')->onDelete('cascade');
             $table->string('path');
+            $table->boolean('main')->default(false);
             $table->timestamps();
         });
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Parcours;
 use App\Models\Image;
+use Illuminate\Support\Facades\Storage;
 
 class ParcoursController extends Controller
 {
@@ -42,13 +43,22 @@ class ParcoursController extends Controller
         $parcours = Parcours::all();
         $container=array() ;
         foreach($parcours as $parcour){
-            $image=$parcour->images()->first();
+            $images=$parcour->images;
+            $image=null;
+            foreach($images as $img){
+                if ($img->main==1){
+                    $image=$img ; 
+                }
+            }
+            if($image==null){
+                $image=$parcour->images()->first();
+            }
             $ville_depart=$parcour->etapes()->first();
             if ($image!=null){
-                $image='/images/'.$parcour->id."/".$image->path;
+                $image='/storage/images/'.$image->path;
             }
             if ($ville_depart!=null){
-                $ville_depart=$ville_depart->Ville_depart;
+                $ville_depart=$ville_depart->ville_depart;
             }
             $obj=([
                 'id' => $parcour->id,
@@ -69,13 +79,22 @@ class ParcoursController extends Controller
         $parcours = Parcours::orderBy('created_at', 'desc')->take(3)->get();
         $container=array() ;
         foreach($parcours as $parcour){
-            $image=$parcour->images()->first();
+            $images=$parcour->images;
+            $image=null;
+            foreach($images as $img){
+                if ($img->main==1){
+                    $image=$img ; 
+                }
+            }
+            if($image==null){
+                $image=$parcour->images()->first();
+            }
             $ville_depart=$parcour->etapes()->first();
             if ($image!=null){
-                $image='/images/'.$parcour->id."/".$image->path;
+                $image='/storage/images/'.$image->path;
             }
             if ($ville_depart!=null){
-                $ville_depart=$ville_depart->Ville_depart;
+                $ville_depart=$ville_depart->ville_depart;
             }
             $obj=([
                 'id' => $parcour->id,
@@ -97,7 +116,7 @@ class ParcoursController extends Controller
         $container=array() ;
         $image=$parcour->images;
         $images=array();
-        $deb_path='/images/'.$id."/";
+        $deb_path='/storage/images/';
         foreach($image as $img){
             array_push($images,$deb_path.$img->path);
         }
@@ -113,7 +132,7 @@ class ParcoursController extends Controller
             'deniveleCumul' => $parcour->deniveleCumul,
             'prix' =>$parcour->prix,
             'distance_moy'=> $parcour->distance_moy,
-            'plan_parcours'=> '/images/'.$id."/".$parcour->plan_parcours,
+            'plan_parcours'=> '/storage/images/'.$parcour->plan_parcours,
             'description_courte' => $parcour->description_courte,
             'image' => $images,
             'etapes' => $etape
@@ -157,5 +176,25 @@ class ParcoursController extends Controller
             'deniveleCumul' => $deniveleCumul,
             'distance_moy' => $distance_moy
         ]); 
+    }
+
+    public function add_plan(Request $request){
+        $parcour=Parcours::find($request->id);
+        $parcour->update([
+            'plan_parcours' => $request->plan_parcours
+        ]);
+    }
+
+    public function delete_parcours(Request $request){
+        $parcour=Parcours::find($request->id);
+        foreach ($parcour->images as $image){
+            if ($image->path!=''){
+                Storage::delete('public/images/' . $image->path);
+            }
+        }
+        if ($parcour->plan_parcours!=''){
+            Storage::delete('public/images/' . $parcour->plan_parcours);
+        }
+        $parcour->delete();
     }
 }

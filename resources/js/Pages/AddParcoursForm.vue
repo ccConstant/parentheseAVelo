@@ -4,9 +4,11 @@ import { Head } from '@inertiajs/vue3';
 import AddEtapeForm from '@/Pages/AddEtapeForm.vue';
 import { ref } from 'vue';
 import axios from 'axios';
+import ImageUpload from '@/Components/ImageUpload.vue';
 
 const parcours_id = ref(null);
 const etapes = ref([]);
+const images = ref([]);
 const errors = ref({});
 
 const form = ref({
@@ -46,6 +48,10 @@ const submitForm = () => {
 
 const addEtape = () => {
   etapes.value.push({ id: etapes.value.length, parcours_id: parcours_id.value });
+};
+
+const addImage = () => {
+  images.value.push({ id: images.value.length, parcours_id: parcours_id.value });
 };
 </script>
 
@@ -88,19 +94,26 @@ const addEtape = () => {
                   </select>
                   <div v-if="errors.difficulte" class="text-danger">{{ errors.difficulte[0] }}</div>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" style="margin-bottom:50px;">
                   <label for="prix" class="form-label">Prix</label>
                   <input type="number" class="form-control custom-input" id="prix" v-model="form.prix" :disabled="parcours_id !== null" required>
                   <div v-if="errors.prix" class="text-danger">{{ errors.prix[0] }}</div>
                 </div>
+
+                  
                 <button type="submit" class="btn custom-btn" :disabled="parcours_id !== null">Créer le parcours</button>
               </form>
 
               <div v-if="parcours_id">
-                <button @click="addEtape" class="btn custom-btn mt-3">Ajouter étape</button>
+                  <ImageUpload :parcours_id="parcours_id"  :is_plan="true"/>
                 <div v-for="etape in etapes" :key="etape.id">
                   <AddEtapeForm :parcours_id="etape.parcours_id" />
                 </div>
+                <button @click="addEtape" class="btn custom-btn mt-3">Ajouter étape</button>
+                <div v-for="image in images" :key="image.id">
+                  <ImageUpload :parcours_id="parcours_id"  :is_plan="false"/>
+                </div>
+                <button @click="addImage" class="btn custom-btn mt-3">Ajouter image</button>
               </div>
             </div>
           </div>

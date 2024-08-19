@@ -17,7 +17,7 @@ import Parcours from '@/Components/Parcours.vue'
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900"> 
                         <div class="alignBlock">
-                            <div class="alignBlockInline" v-for="(component) in parcours" :key="component.key">
+                            <div class="alignBlockInline" v-for="(component) in parcours" :key="component.id">
                                 <Parcours :Id=component.id
                                             :Titre=component.titre
                                             :DureeJours=component.dureeJours
@@ -26,6 +26,8 @@ import Parcours from '@/Components/Parcours.vue'
                                             :Description_courte=component.description_courte
                                             :Image=component.image
                                             :Ville_depart=component.ville_depart
+                                            :Delete=true
+                                            @remove="removeParcours"
                                 ></Parcours>
                             </div>
                         </div>
@@ -49,6 +51,35 @@ export default {
             this.parcours=response.data;
         }).catch(e => console.log(e))
     },
+    methods: {
+      removeParcours(id) {
+          if (confirm("Êtes-vous sûr de vouloir supprimer ce parcours ?")) {
+              console.log("remove parcours");
+              console.log(id);
+              console.log(this.parcours);
+              axios.post('/parcours/delete', {
+                  id: id
+              }).then(response => {
+                  console.log(response);
+                  for (let i = 0; i < this.parcours.length; i++) {
+                      if (this.parcours[i].id === id) {
+                          console.log("found");
+                          console.log(this.parcours[i]);
+                          console.log(this.parcours.length);
+                          this.parcours.splice(i, 1);
+                          this.parcours = [...this.parcours]; 
+                          console.log(this.parcours.length);
+                          break;
+                      }
+                  }
+              }).catch(error => {
+                  console.error(error);
+              });
+          } else {
+              console.log("Suppression annulée");
+          }
+      }
+  }
 }
 
 </script>

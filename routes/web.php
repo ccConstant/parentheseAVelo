@@ -72,10 +72,15 @@ Route::get('/parcours/get/{id}', [ParcoursController::class, 'get_parcour']);
 Route::post('/parcours/maj', [ParcoursController::class, 'maj_parcours']);
 Route::post('/parcours/verif', [ParcoursController::class, 'verif_parcours']);
 Route::post('/parcours/add', [ParcoursController::class, 'add_parcours']);
+Route::post('/parcours/delete', [ParcoursController::class, 'delete_parcours']);
+Route::post('/parcours/addPlan', [ParcoursController::class, 'add_plan']);
 Route::post('/etape/add', [EtapeController::class, 'add_etape']);
 Route::post('/etape/verif', [EtapeController::class, 'verif_etape']);
+Route::post('/image/add', [ImageController::class, 'add_image']);
+Route::post('/image/verifOnlyOneMain', [ImageController::class, 'verif_only_one_main']);
 
-Route::post('/upload-image', [ImageUploadController::class, 'upload']);
+Route::post('/upload-image', [ImageUploadController::class, 'upload'])->middleware('auth:sanctum');
+
 
 
 Route::get('/dashboard', function () {

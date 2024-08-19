@@ -3,26 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ImageUploadController extends Controller
 {
     public function upload(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $image = $request->file('image');
-        $imageName = time() . '.' . $image->extension();
-        $imagePath = public_path('images');
+        $imageName = Str::random(10) . '.' . $image->getClientOriginalExtension();
+        $image->storeAs('public/images', $imageName);
 
-        // Optionally resize or manipulate the image using Intervention/Image
-        $img = Image::make($image->path());
-        $img->resize(500, 500, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save($imagePath . '/' . $imageName);
-
-        return response()->json(['success' => 'Image uploaded successfully.', 'image_name' => $imageName]);
+        return response()->json(['image_name' => $imageName]);
     }
 }

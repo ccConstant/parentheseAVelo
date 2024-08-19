@@ -64,7 +64,12 @@
             </div>
             <p class="card-text">{{description_courte}}</p>
             <p><b> Ville de départ : {{ville_depart}} </b></p>
-            <button class="btn btn-light" @click="redirect" style="margin-left:100px">Découvrir</button>
+            <div v-if="!Delete">
+                <button class="btn btn-light" @click="redirect" style="margin-left:100px">Découvrir</button>
+            </div>
+            <div v-if="Delete">
+                <button class="btn btn-light" @click="supprimer" style="margin-left:100px">Supprimer</button>
+            </div>
         </div>
     </div>
 </template>
@@ -96,6 +101,10 @@ export default {
         },
         Ville_depart: {
             type: String
+        },
+        Delete:{
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -107,8 +116,7 @@ export default {
             prix: this.Prix,
             difficulte: this.Difficulte,
             description_courte: this.Description_courte,
-            ville_depart: this.Ville_depart
-            
+            ville_depart: this.Ville_depart,
         }
     },
     created() {
@@ -117,6 +125,11 @@ export default {
     methods: {
        redirect(){
         window.location.href = "/parcours/"+this.id;
+        },
+        supprimer(){
+            console.log("supprimer");
+            console.log(this.Id)
+            this.$emit('remove', this.Id);
         }
     },
 }

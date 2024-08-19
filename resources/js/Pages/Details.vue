@@ -39,7 +39,7 @@
       :key="etape.key"
     >
       <div class="Inline">
-        <h3> Jour {{etape.NumeroEtape}} </h3>
+        <h3> Jour {{etape.numero_etape}} </h3>
         <svg
           style="margin-left:5%"
           xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +55,7 @@
           />
         </svg>
         <!--40px-->
-        <h4 style="margin-left:0.5%"> {{etape.Denivele}} m </h4>
+        <h4 style="margin-left:0.5%"> {{etape.denivele}} m </h4>
         <svg
           style="margin-left:25px"
           xmlns="http://www.w3.org/2000/svg"
@@ -69,16 +69,16 @@
             d="M7.293.707A1 1 0 0 0 7 1.414V4H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h5v6h2v-6h3.532a1 1 0 0 0 .768-.36l1.933-2.32a.5.5 0 0 0 0-.64L13.3 4.36a1 1 0 0 0-.768-.36H9V1.414A1 1 0 0 0 7.293.707"
           />
         </svg>
-        <h4 style="margin-left:0.5%"> {{etape.Distance}} Km</h4>
+        <h4 style="margin-left:0.5%"> {{etape.distance}} Km</h4>
       </div>
       <div class="Inline">
         <b>
           <p style="margin-bottom:15px">
-            {{etape.Ville_depart}} - {{etape.Ville_arrivee}}
+            {{etape.ville_depart}} - {{etape.ville_arrivee}}
           </p>
         </b>
       </div>
-      <p> {{etape.Description}} </p>
+      <p> {{etape.description}} </p>
     </div>
 
     <div class="infosG">
@@ -178,6 +178,8 @@ const updateSlide = () => {
 onMounted(() => {
   axios.get(`/parcours/get/${id}`).then((response) => {
     parcours.value = response.data;
+    console.log(parcours.value);
+    console.log(parcours.value.etapes);
   }).catch(e => console.log(e));
 });
 </script>
