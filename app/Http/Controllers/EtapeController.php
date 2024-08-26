@@ -30,7 +30,7 @@ class EtapeController extends Controller
             'ville_arrivee' => 'required|min:3|max:255',
             'distance' => 'required|numeric',
             'denivele' => 'required|numeric',
-            'description' => 'required|min:3|max:800',
+            'description' => 'required|min:3|max:1000',
             'numero_etape' => 'required|numeric',
         ],
         [
@@ -46,10 +46,27 @@ class EtapeController extends Controller
             'denivele.numeric' => 'Vous devez entrer un dénivelé valide pour l\'étape',
             'description.required' => 'Vous devez entrer une description pour l\'étape',
             'description.min' => 'Vous devez entrer au moins trois caractères',
-            'description.max' => 'Vous devez entrer au maximum 800 caractères',
+            'description.max' => 'Vous devez entrer au maximum 1000 caractères',
             'numero_etape.required' => 'Vous devez entrer un numéro d\'étape pour l\'étape',
             'numero_etape.numeric' => 'Vous devez entrer un numéro d\'étape valide pour l\'étape',
         ]
     );
   }
+
+    public function update_etape(Request $request){
+      $etape=Etape::find($request->id);
+      $etape->update([
+          'ville_depart' => $request->ville_depart,
+          'ville_arrivee' => $request->ville_arrivee,
+          'distance' => $request->distance,
+          'denivele' => $request->denivele,
+          'description' => $request->description,
+          'numero_etape' => $request->numero_etape
+      ]);
+    }
+
+    public function delete_etape(Request $request){
+      $etape=Etape::find($request->id);
+      $etape->delete();
+    }
 }

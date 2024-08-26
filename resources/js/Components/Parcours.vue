@@ -1,7 +1,7 @@
 
 <template>
     <div class="card h-100" style="width: 21rem; background-color:#4CAF50;">
-        <img id="imgParcours" class="card-img-top" alt="Card image cap" v-bind:src="image">
+        <img id="imgParcours" class="card-img-top" :alt="image[1]" v-bind:src="image[0]">
         <div class="card-body">
             <h5 class="card-title">{{titre}}</h5>
             <div class="Inline">
@@ -67,9 +67,12 @@
             <div v-if="!Delete">
                 <button class="btn btn-light" @click="redirect" style="margin-left:100px">Découvrir</button>
             </div>
-            <div v-if="Delete">
-                <button class="btn btn-light" @click="supprimer" style="margin-left:100px">Supprimer</button>
+            <div v-if="Delete" class="button-group">
+                <button class="btn btn-light" @click="modifier">Modifier</button>
+                <button class="btn btn-light" @click="supprimer">Supprimer</button>
             </div>
+
+            
         </div>
     </div>
 </template>
@@ -82,7 +85,7 @@ export default {
             type: Number
         },
         Image: {
-            type: String
+            type: Array
         },
         Titre: {
             type: String
@@ -123,13 +126,17 @@ export default {
         console.log('Parcours.vue created');
     },
     methods: {
-       redirect(){
-        window.location.href = "/parcours/"+this.id;
+       redirect() {
+            window.open("/parcours/" + this.id, "_blank");
         },
         supprimer(){
             console.log("supprimer");
             console.log(this.Id)
             this.$emit('remove', this.Id);
+        },
+        modifier(){
+            console.log("modifier");
+            window.location.href = "/updateParcours/"+this.id;
         }
     },
 }
@@ -163,6 +170,17 @@ h5 {
   font-weight: bold;
   font-family: 'Bebas Neue', sans-serif;
   padding-bottom: 10px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between; /* Espace entre les boutons */
+    gap: 10px; /* Optionnel: espace entre les boutons */
+    margin-top: 10px; /* Optionnel: espace au-dessus des boutons */
+}
+
+.button-group button {
+    flex: 1; /* Les boutons prennent la même largeur */
 }
 
 </style>

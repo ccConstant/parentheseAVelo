@@ -16,8 +16,8 @@ class ParcoursController extends Controller
             $request,
             [
                 'titre' => 'required|min:3|max:255',
-                'description' => 'required|min:3|max:800',
-                'description_courte' => 'required|min:3|max:255',
+                'description' => 'required|min:3|max:1000',
+                'description_courte' => 'required|min:3|max:1000',
                 'difficulte' => 'required|in:facile,moyen,difficile',
                 'prix' => 'required|numeric'
 
@@ -28,10 +28,10 @@ class ParcoursController extends Controller
                 'titre.max' => 'Vous devez entrer au maximum 255 caractères',
                 'description.required' => 'Vous devez entrer une description pour le parcours',
                 'description.min' => 'Vous devez entrer au moins trois caractères',
-                'description.max' => 'Vous devez entrer au maximum 800 caractères',
+                'description.max' => 'Vous devez entrer au maximum 1000 caractères',
                 'description_courte.required' => 'Vous devez entrer une description courte pour le parcours',
                 'description_courte.min' => 'Vous devez entrer au moins trois caractères',
-                'description_courte.max' => 'Vous devez entrer au maximum 255 caractères',
+                'description_courte.max' => 'Vous devez entrer au maximum 1000 caractères',
                 'difficulte.required' => 'Vous devez entrer une difficulté pour le parcours',
                 'difficulte.in' => 'Vous devez entrer une difficulté valide pour le parcours',
                 'prix.required' => 'Vous devez entrer un prix pour le parcours',
@@ -55,8 +55,12 @@ class ParcoursController extends Controller
             }
             $ville_depart=$parcour->etapes()->first();
             if ($image!=null){
-                $image='/storage/images/'.$image->path;
+                $image_path='/storage/images/'.$image->path;
+                $image_alt=$image->alt;
             }
+            $image_container=array();
+            array_push($image_container,$image_path);
+            array_push($image_container,$image_alt);
             if ($ville_depart!=null){
                 $ville_depart=$ville_depart->ville_depart;
             }
@@ -67,7 +71,7 @@ class ParcoursController extends Controller
                 'difficulte' => $parcour->difficulte,
                 'prix' =>$parcour->prix,
                 'description_courte' => $parcour->description_courte,
-                'image' => $image,
+                'image' => $image_container,
                 'ville_depart' => $ville_depart
             ]);
             array_push($container,$obj);
@@ -91,8 +95,12 @@ class ParcoursController extends Controller
             }
             $ville_depart=$parcour->etapes()->first();
             if ($image!=null){
-                $image='/storage/images/'.$image->path;
+                $image_path='/storage/images/'.$image->path;
+                $image_alt=$image->alt;
             }
+            $image_container=array();
+            array_push($image_container,$image_path);
+            array_push($image_container,$image_alt);
             if ($ville_depart!=null){
                 $ville_depart=$ville_depart->ville_depart;
             }
@@ -103,7 +111,7 @@ class ParcoursController extends Controller
                 'difficulte' => $parcour->difficulte,
                 'prix' =>$parcour->prix,
                 'description_courte' => $parcour->description_courte,
-                'image' => $image,
+                'image' => $image_container,
                 'ville_depart' => $ville_depart
             ]);
             array_push($container,$obj);
@@ -118,7 +126,12 @@ class ParcoursController extends Controller
         $images=array();
         $deb_path='/storage/images/';
         foreach($image as $img){
-            array_push($images,$deb_path.$img->path);
+            $image_container=array();
+            array_push($image_container,$img->id);
+            array_push($image_container,$deb_path.$img->path);
+            array_push($image_container,$img->alt);
+            array_push($image_container,$img->main);
+            array_push($images,$image_container);
         }
 
         $etape=$parcour->etapes;
@@ -183,6 +196,17 @@ class ParcoursController extends Controller
         $parcour->update([
             'plan_parcours' => $request->plan_parcours
         ]);
+    }
+
+    public function update_parcours(Request $request){
+        $parcour=Parcours::find($request->id);
+        $parcour->update([
+            'titre' => $request->titre,
+            'description' => $request->description,
+            'description_courte' => $request->description_courte,
+            'difficulte' => $request->difficulte,
+            'prix' => $request->prix
+        ]) ;
     }
 
     public function delete_parcours(Request $request){

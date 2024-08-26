@@ -25,7 +25,7 @@
         <img
           v-for="image in parcours.image"
           :key="image.key"
-          :src="image"
+          :src="image[1]"
           id="imgCarousel"
           :alt="image.alt"
         />
@@ -144,13 +144,26 @@ import Navbar from '@/Components/Navbar.vue';
 import Footer from '@/Components/Footer.vue';
 import Difficulte from '@/Components/Difficulte.vue';
 import { Head } from '@inertiajs/vue3';
-
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import axios from 'axios';
 
 const id = window.location.pathname.split('/')[2];
 const parcours = ref([]);
 const currentIndex = ref(0);
+let slideInterval = null;
+
+const startSlideShow = () => {
+  slideInterval = setInterval(() => {
+    nextSlide();
+  }, 3000); // Change image every 3 seconds
+};
+
+const stopSlideShow = () => {
+  if (slideInterval) {
+    clearInterval(slideInterval);
+    slideInterval = null;
+  }
+};
 
 const prevSlide = () => {
   if (currentIndex.value === 0) {
@@ -159,6 +172,7 @@ const prevSlide = () => {
     currentIndex.value--;
   }
   updateSlide();
+  resetSlideShow();
 };
 
 const nextSlide = () => {
@@ -168,6 +182,7 @@ const nextSlide = () => {
     currentIndex.value++;
   }
   updateSlide();
+  resetSlideShow();
 };
 
 const updateSlide = () => {
@@ -175,14 +190,23 @@ const updateSlide = () => {
   document.querySelector('.carousel-slide').style.transform = `translateX(-${currentIndex.value * slideWidth}px)`;
 };
 
+const resetSlideShow = () => {
+  stopSlideShow();
+  startSlideShow();
+};
+
 onMounted(() => {
   axios.get(`/parcours/get/${id}`).then((response) => {
     parcours.value = response.data;
-    console.log(parcours.value);
-    console.log(parcours.value.etapes);
+    startSlideShow(); // Start the slide show once the data is loaded
   }).catch(e => console.log(e));
 });
+
+onUnmounted(() => {
+  stopSlideShow(); // Clear the interval when the component is unmounted
+});
 </script>
+
 <style scoped>
 .backgroundDetail {
   background-color: #4CAF50;

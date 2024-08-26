@@ -11,7 +11,8 @@ class Image extends Model
     protected $fillable=[
         'path', 
         'parcours_id',
-        'main'
+        'main',
+        'alt'
     ]; 
 
     public function parcours(){

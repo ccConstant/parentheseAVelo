@@ -12,6 +12,11 @@
         <label>
           <input type="checkbox" v-model="isMainImage" :disabled="imageUrl != ''"/> Est-ce l'image principale?
         </label>
+        <div class="mb-3">
+          <label for="alt" class="form-label">Texte alternatif </label>
+          <input type="text" class="form-control custom-input" id="alt" v-model="form.alt" :disabled="imageUrl != ''">
+          <div v-if="errors.alt" class="text-danger">{{ errors.alt[0] }} </div>
+        </div>
       </div>
       <button type="submit" :disabled="imageUrl != ''" class="btn custom-btn">Télécharger</button>
     </form>
@@ -34,8 +39,9 @@ import axios from 'axios';
 const file = ref(null);
 const imageUrl = ref('');
 const imageUrlAttribute = ref('');
-const errors = ref([]);
-const isMainImage = ref(false); // Ajoutez cette ligne
+const errors = ref({});
+const isMainImage = ref(false);
+const verif = ref(true);
 
 const props = defineProps({
   parcours_id: {
@@ -48,6 +54,10 @@ const props = defineProps({
   }
 });
 
+const form = ref({
+  alt: ''
+});
+
 const onFileChange = (event) => {
   file.value = event.target.files[0];
 };
@@ -58,64 +68,82 @@ const uploadImage = async () => {
     return;
   }
 
+  // Reset errors before validation
+  errors.value = {};
+
   const formData = new FormData();
   formData.append('image', file.value);
   formData.append('parcours_id', props.parcours_id);
-  formData.append('is_main', isMainImage.value); // Ajoutez cette ligne
+  formData.append('is_main', isMainImage.value);
 
-  try {
-    console.log('Envoi du formulaire de téléchargement');
-    const response = await axios.post('/upload-image', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      },
-    });
-    console.log('Réponse reçue:', response);
-    imageUrl.value = `/storage/images/${response.data.image_name}`;
-    imageUrlAttribute.value = response.data.image_name;
-    errors.value = [];
-  } catch (error) {
-    console.error('Erreur lors du téléchargement:', error);
-    if (error.response && error.response.data.errors) {
-      errors.value = Object.values(error.response.data.errors).flat();
-    } else {
-      errors.value = ['Une erreur est survenue lors du téléchargement.'];
+  if (!props.is_plan) {
+    try {
+    // Validate the image alt text first
+      const verifResponse = await axios.post('/image/verif', {
+        alt: form.value.alt
+      });
+
+      verif.value = true; // Set verif to true if validation is successful
+    } catch (error) {
+      console.error(error);
+      errors.value = error.response.data.errors;
+      verif.value = false; // Set verif to false if there's an error
+      return; // Exit if there's a validation error
     }
   }
-  console.log("isplan? "+props.is_plan);
-  console.log("parcours_id: "+props.parcours_id);
-  if (props.is_plan) {
-    axios.post('/parcours/addPlan', {
-      id: props.parcours_id,
-      plan_parcours: imageUrlAttribute.value
-    }).then(response => {
-      console.log("Parcours add plan");
-    }).catch(error => {
-      console.error(error);
-    });
-  } else {
-    console.log("Parcours add image deb");
-    axios.post('/image/verifOnlyOneMain', {
-      parcours_id: props.parcours_id
-    }).then(response => {
-      console.log("Parcours verif only one main");
-    }).catch(error => {
-      console.error(error);
-    })
-    axios.post('/image/add', {
-      parcours_id: props.parcours_id,
-      path: imageUrlAttribute.value,
-      main: isMainImage.value // Utilisez cette ligne
-    }).then(response => {
-      console.log("Parcours add image reussi");
-    }).catch(error => {
-      console.error(error);
-    });
+
+  if (verif.value) {
+    try {
+      console.log('Envoi du formulaire de téléchargement');
+      const response = await axios.post('/upload-image', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+      });
+      console.log('Réponse reçue:', response);
+      imageUrl.value = `/storage/images/${response.data.image_name}`;
+      imageUrlAttribute.value = response.data.image_name;
+      errors.value = [];
+    } catch (error) {
+      console.error('Erreur lors du téléchargement:', error);
+      if (error.response && error.response.data.errors) {
+        errors.value = Object.values(error.response.data.errors).flat();
+      } else {
+        errors.value = ['Une erreur est survenue lors du téléchargement.'];
+      }
+      return; // Exit if there's an error during upload
+    }
+
+    // Perform additional actions after a successful image upload
+    try {
+      if (props.is_plan) {
+        await axios.post('/parcours/addPlan', {
+          id: props.parcours_id,
+          plan_parcours: imageUrlAttribute.value
+        });
+        console.log("Parcours add plan");
+      } else {
+        console.log("Parcours add image deb");
+        await axios.post('/image/verifOnlyOneMain', {
+          parcours_id: props.parcours_id
+        });
+        console.log("Parcours verif only one main");
+        console.log("alt'"+form.value.alt+"'");
+        await axios.post('/image/add', {
+          parcours_id: props.parcours_id,
+          path: imageUrlAttribute.value,
+          main: isMainImage.value,
+          alt: form.value.alt
+        });
+        console.log("Parcours add image reussi");
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'action supplémentaire:', error);
+    }
   }
 };
 </script>
-
 
 <style scoped>
 .upload-container {
@@ -154,4 +182,22 @@ img {
 .custom-btn:disabled {
   background-color: #3E8B47; /* Couleur de fond légèrement plus foncée */
 }
+
+.custom-input {
+  background-color: #4CAF50; /* Couleur de fond personnalisée */
+  border-color: black; /* Couleur de bordure personnalisée */
+  color: black; /* Couleur du texte personnalisée */
+}
+.custom-input:focus {
+    background-color: #45A049; /* Couleur de fond lors du focus */
+  border-color: #2E8B57; /* Couleur de bordure lors du focus */
+  color: black; /* Couleur du texte lors du focus */
+  box-shadow: 0 0 5px rgba(46, 139, 87, 0.5); /* Ombre lors du focus */
+  outline: none; /* Supprime la bordure de focus par défaut */
+}
+
+.custom-input:disabled {
+  background-color: #3E8B47; /* Couleur de fond légèrement plus foncée */
+}
+
 </style>

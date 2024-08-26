@@ -62,6 +62,10 @@ Route::get('/manageParcours', function() {
     return Inertia::render('ManageParcours');
 })->name('manageParcours');
 
+Route::get('/updateParcours/{id}', function() {
+    return Inertia::render('UpdateParcoursForm');
+})->name('UpdateParcours');
+
 Route::get('/addParcoursForm', function() {
     return Inertia::render('AddParcoursForm');
 })->name('addParcoursForm');
@@ -73,11 +77,17 @@ Route::post('/parcours/maj', [ParcoursController::class, 'maj_parcours']);
 Route::post('/parcours/verif', [ParcoursController::class, 'verif_parcours']);
 Route::post('/parcours/add', [ParcoursController::class, 'add_parcours']);
 Route::post('/parcours/delete', [ParcoursController::class, 'delete_parcours']);
+Route::post('/parcours/update', [ParcoursController::class, 'update_parcours']);
 Route::post('/parcours/addPlan', [ParcoursController::class, 'add_plan']);
 Route::post('/etape/add', [EtapeController::class, 'add_etape']);
 Route::post('/etape/verif', [EtapeController::class, 'verif_etape']);
+Route::post('/etape/update', [EtapeController::class, 'update_etape']);
+Route::post('/etape/delete', [EtapeController::class, 'delete_etape']);
 Route::post('/image/add', [ImageController::class, 'add_image']);
 Route::post('/image/verifOnlyOneMain', [ImageController::class, 'verif_only_one_main']);
+Route::post('/image/update', [ImageController::class, 'update_image']);
+Route::post('/image/delete', [ImageController::class, 'delete_image']);
+Route::post('/image/verif', [ImageController::class, 'verif_image']);
 
 Route::post('/upload-image', [ImageUploadController::class, 'upload'])->middleware('auth:sanctum');
 

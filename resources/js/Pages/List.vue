@@ -8,6 +8,7 @@
     <h2 style="margin-bottom:50px;"> Nos parcours organisés </h2>
     <div class="alignBlock">
         <div class="alignBlockInline" v-for="(component) in parcours" :key="component.key">
+          <a @click="redirect(component.id)" style="cursor:pointer">
             <Parcours :Id=component.id
                         :Titre=component.titre
                         :DureeJours=component.dureeJours
@@ -17,6 +18,7 @@
                         :Image=component.image
                         :Ville_depart=component.ville_depart
             ></Parcours>
+          </a>
         </div>
     </div>
 </div>
@@ -43,6 +45,7 @@ export default {
         console.log('List.vue created');
 
 
+
         
         /*axios.get('/parcours')
             .then(response => {
@@ -53,8 +56,14 @@ export default {
                 
             axios.get('/parcours').then((response) => {
                this.parcours=response.data;
+               console.log(this.parcours);
             }).catch(e => console.log(e))
     },
+     methods: {
+       redirect(id) {
+            window.open("/parcours/" + id, "_blank");
+        },
+     }
 }
 
 
